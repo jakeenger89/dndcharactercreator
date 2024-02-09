@@ -1,0 +1,244 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D&D Character Class Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #classInfo {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .classDetails {
+      text-align: left;
+      margin-right: 20px;
+    }
+
+    .classDetails h2 {
+      margin-top: 0;
+    }
+
+    .classDetails p {
+      margin-bottom: 5px;
+    }
+
+    .classImageContainer {
+      overflow: hidden;
+      width: auto; /* Adjust as needed */
+      height: auto; /* Adjust as needed */
+      max-width: 400px; /* Set the maximum width for the container */
+      max-height: 400px; /* Set the maximum height for the container */
+    }
+
+    .classImage {
+      width: 100%; /* Ensure the image takes up the full width of the container */
+      height: auto; /* Allow the height to adjust according to the aspect ratio */
+    }
+
+    .classContainer {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 20px;
+      max-width: 800px; /* Adjusted width */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>D&D Character Class Generator</h1>
+  <p>Click the button below to generate your adventurer!</p>
+  <button class="button" onclick="generateClass()">Create your Adventurer!</button>
+  <div class="classContainer" id="classContainer">
+    <div id="classInfo"></div>
+  </div>
+
+  <script>
+    function generateClass() {
+      var classes = [
+        {
+          name: 'Barbarian',
+          description: 'A fierce warrior of primitive background who can enter a battle rage.',
+          str: getRandomNumber(15, 20),
+          dex: getRandomNumber(10, 15),
+          con: getRandomNumber(14, 18),
+          int: getRandomNumber(6, 12),
+          wis: getRandomNumber(6, 12),
+          cha: getRandomNumber(6, 12),
+          images: ['barbarian1.jpg', 'barbarian2.jpg', 'barbarian3.jpg']
+        },
+        {
+          name: 'Bard',
+          description: 'An inspiring magician whose power echoes the music of creation.',
+          str: getRandomNumber(8, 14),
+          dex: getRandomNumber(12, 18),
+          con: getRandomNumber(8, 14),
+          int: getRandomNumber(10, 16),
+          wis: getRandomNumber(10, 16),
+          cha: getRandomNumber(14, 20),
+          images: ['bard1.jpg', 'bard2.jpg', 'bard3.jpg']
+        },
+        {
+          name: 'Cleric',
+          description: 'A priestly champion who wields divine magic in service of a higher power.',
+          str: getRandomNumber(10, 14),
+          dex: getRandomNumber(10, 14),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(14, 18),
+          cha: getRandomNumber(12, 16),
+          images: ['cleric1.jpg', 'cleric2.jpg', 'cleric3.jpg']
+        },
+        {
+          name: 'Druid',
+          description: 'A priest of the Old Faith, wielding the powers of nature and adopting animal forms.',
+          str: getRandomNumber(10, 14),
+          dex: getRandomNumber(12, 16),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(14, 18),
+          cha: getRandomNumber(8, 12),
+          images: ['druid1.jpg', 'druid2.jpg', 'druid3.jpg']
+        },
+        {
+          name: 'Fighter',
+          description: 'A master of martial combat, skilled with a variety of weapons and armor.',
+          str: getRandomNumber(14, 18),
+          dex: getRandomNumber(12, 16),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(14, 18),
+          cha: getRandomNumber(8, 12),
+          images: ['fighter1.jpg', 'fighter2.jpg', 'fighter3.jpg']
+        },
+        {
+          name: 'Monk',
+          description: 'A master of martial arts, harnessing the power of the body in pursuit of physical and spiritual perfection.',
+          str: getRandomNumber(14, 18),
+          dex: getRandomNumber(10, 14),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(8, 12),
+          cha: getRandomNumber(14, 19),
+          images: ['monk1.jpg', 'monk2.jpg', 'monk3.jpg']
+        },
+        {
+          name: 'Paladin',
+          description: 'A holy warrior bound to a sacred oath.',
+          str: getRandomNumber(14, 18),
+          dex: getRandomNumber(10, 14),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(8, 12),
+          cha: getRandomNumber(14, 28),
+          images: ['paladin1.jpg', 'paladin2.jpg', 'paladin3.jpg']
+        },
+        {
+          name: 'Ranger',
+          description: 'A warrior who combats threats on the edges of civilization.',
+          str: getRandomNumber(10, 14),
+          dex: getRandomNumber(14, 18),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(14, 18),
+          cha: getRandomNumber(8, 12),
+          images: ['ranger1.jpg', 'ranger2.jpg', 'ranger3.jpg']
+        },
+        {
+          name: 'Rogue',
+          description: 'A scoundrel who uses sealth and trickery to overcome obstacles and enemies.',
+          str: getRandomNumber(10, 14),
+          dex: getRandomNumber(14, 18),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(8, 12),
+          cha: getRandomNumber(10, 14),
+          images: ['rogue1.jpg', 'rogue2.jpg', 'rogue3.jpg']
+        },
+        {
+          name: 'Sorcerer',
+          description: 'A spellcaster who draws on inherent magic from a gift or bloodline.',
+          str: getRandomNumber(8, 12),
+          dex: getRandomNumber(10, 14),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(8, 12),
+          cha: getRandomNumber(14, 18),
+          images: ['sorcerer1.jpg', 'sorcerer2.jpg', 'sorcerer3.jpg']
+        },
+        {
+          name: 'Warlock',
+          description: 'A weilder of magic that is derived from a bargain with an extraplanar entity.',
+          str: getRandomNumber(8, 12),
+          dex: getRandomNumber(10, 14),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(8, 12),
+          wis: getRandomNumber(8, 12),
+          cha: getRandomNumber(14, 18),
+          images: ['warlock1.jpg', 'warlock2.jpg', 'warlock3.jpg']
+        },
+        {
+          name: 'Wizard',
+          description: 'A scholarly magic-user capable of manipulating the structures of reality.',
+          str: getRandomNumber(8, 12),
+          dex: getRandomNumber(10, 14),
+          con: getRandomNumber(12, 16),
+          int: getRandomNumber(14, 18),
+          wis: getRandomNumber(8, 12),
+          cha: getRandomNumber(8, 12),
+          images: ['wizard1.jpg', 'wizard2.jpg', 'wizard3.jpg']
+        },
+      ];
+
+      var randomClass = classes[Math.floor(Math.random() * classes.length)];
+      displayClass(randomClass);
+    }
+
+    function displayClass(characterClass) {
+      var classInfo = document.getElementById('classInfo');
+      var randomImageIndex = Math.floor(Math.random() * characterClass.images.length);
+      var randomImage = characterClass.images[randomImageIndex];
+
+      classInfo.innerHTML = `
+        <div class="classDetails">
+          <h2>${characterClass.name}</h2>
+          <p>${characterClass.description}</p>
+          <p>Strength (STR): ${characterClass.str}</p>
+          <p>Dexterity (DEX): ${characterClass.dex}</p>
+          <p>Constitution (CON): ${characterClass.con}</p>
+          <p>Intelligence (INT): ${characterClass.int}</p>
+          <p>Wisdom (WIS): ${characterClass.wis}</p>
+          <p>Charisma (CHA): ${characterClass.cha}</p>
+        </div>
+        <div class="classImageContainer">
+          <img class="classImage" src="images/${randomImage}" alt="${characterClass.name} Image">
+        </div>
+      `;
+    }
+
+    function getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  </script>
+</body>
+</html>
